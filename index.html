@@ -157,31 +157,39 @@
 
     <form action="/enviar" method="post">
 
-      <div style="font-weight:600; margin:14px 0 6px;">Nome completo *</div>
-      <input type="text" id="nome" placeholder="Digite seu nome completo">
+      <label for="nome">Nome completo (obrigatório)</label>
+      <input type="text" id="nome" required>
 
-      <input type="email" id="email" placeholder="E-mail *">
-      <div class="erro">Erro.</div>
+      <label for="email">E-mail (obrigatório)</label>
+      <input type="email" id="email" required aria-describedby="email-erro">
+      <div id="email-erro" class="erro">Informe um e-mail válido, no formato nome@dominio.com</div>
 
-      <label>Telefone</label>
+      <label for="telefone">Telefone</label>
       <input type="text" id="telefone" placeholder="(00) 00000-0000">
 
-      <input type="password" id="senha" placeholder="Crie uma senha">
-      <div class="erro">Erro.</div>
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" aria-describedby="senha-erro">
+      <div id="senha-erro" class="erro">A senha deve ter no mínimo 8 caracteres, incluindo uma letra e um número</div>
 
-      <div style="font-weight:600; margin:14px 0 6px;">Turno preferido para contato *</div>
-      <div>
-        <input type="radio" name="turno" id="manha" value="manha"> Manhã<br>
-        <input type="radio" name="turno" id="tarde" value="tarde"> Tarde<br>
-        <input type="radio" name="turno" id="noite" value="noite"> Noite
-      </div>
+      <fieldset>
+        <legend>Turno preferido para contato (obrigatório)</legend>
+        <input type="radio" name="turno" id="manha" value="manha">
+        <label for="manha">Manhã</label><br>
+        <input type="radio" name="turno" id="tarde" value="tarde">
+        <label for="tarde">Tarde</label><br>
+        <input type="radio" name="turno" id="noite" value="noite">
+        <label for="noite">Noite</label>
+      </fieldset>
 
-      <div style="font-weight:600; margin:14px 0 6px;">Assuntos de interesse</div>
-      <div>
-        <input type="checkbox" name="int" id="i1"> Guitarras<br>
-        <input type="checkbox" name="int" id="i2"> Baterias<br>
-        <input type="checkbox" name="int" id="i3"> Teclados
-      </div>
+      <fieldset>
+        <legend>Assuntos de interesse</legend>
+        <input type="checkbox" name="int" id="i1">
+        <label for="i1">Guitarras</label><br>
+        <input type="checkbox" name="int" id="i2">
+        <label for="i2">Baterias</label><br>
+        <input type="checkbox" name="int" id="i3">
+        <label for="i3">Teclados</label>
+      </fieldset>
 
       <p><button type="submit" class="botao">Enviar</button></p>
 
