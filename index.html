@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./assets/css/style.css">
+<script src="assets/js/carrossel.js" defer></script>
+<script src="assets/js/tema.js" defer></script>
 <title>Harmonia Instrumentos Musicais</title>
 </head>
 <body>
@@ -40,11 +42,45 @@
 
     <h1 class="h1-falso">Loja de Instrumentos</h1>
 
+<section class="banner" aria-labelledby="titulo-banner">
+
+        <h2 id="titulo-banner">Semana da Música</h2>
+
+        <p>Confira nossas ofertas especiais</p>
+
+      </section>
+
     <p>
       Bem-vindo à nossa loja. Trabalhamos com <strong>as melhores marcas</strong> do mercado e oferecemos
       <em>garantia estendida</em> em todos os produtos. Nossa nova <strong>política de trocas</strong> entrou em vigor
       neste mês. Para saber mais, <a href="politica.html">leia nossa política de troca</a>.
     </p>
+
+<section class="carrossel" aria-labelledby="titulo-carrossel">
+
+        <h2 id="titulo-carrossel">Destaques da loja</h2>
+
+        <div class="slide ativo" aria-hidden="false">
+          <img src="assets/img/guitarra_eletrica_preta.jpg" alt="Guitarra elétrica">
+          <h3 class="titulo-slide">Guitarras elétricas</h3>
+          <p class="descricao-slide">Confira nosssos modelos</p>
+        </div>
+
+        <div class="slide" aria-hidden="true">
+          <img src="assets/img/bateria.jpg" alt="Bateria músical">
+          <h3 class="titulo-slide">Baterias</h3>
+          <p class="descricao-slide">Cofira nossas baterias</p>
+        </div>
+
+        <div class="slide" aria-hidden="true">
+          <img src="assets/img/piano_digital.jpg" alt="Piano de cauda">
+          <h3 class="titulo-slide">Pianos</h3>
+          <p class="descricao-slide">Confira nossa linha de pianos acústicos</p>
+        </div>
+
+        <button type="button" id="btn-carrossel-proximo" class="btn-primario">Próximo destaque</button>
+
+      </section>
 
     <h2>Guitarras</h2>
 
@@ -58,11 +94,13 @@
 
     <ul class="lista-produtos">
   <li class="cartao">
+    <img src="https://placehold.co/600x400" alt="">
     <strong>Stratocaster HSS</strong><br>
     R$ 4.290,00<br>
     <button type="button" class="botao" onclick="adicionarCarrinho(101)">Adicionar ao carrinho</button>
   </li>
   <li class="cartao">
+    <img src="https://placehold.co/600x400" alt="">
     <strong>Les Paul Standard</strong><br>
     R$ 7.150,00<br>
     <button type="button" class="botao" onclick="adicionarCarrinho(102)">Adicionar ao carrinho</button>
@@ -181,58 +219,6 @@
 </footer>
 
 </div>
-
-<script>
-  (function() {
-    const btnTema = document.getElementById('btn-tema');
-    const raizHtml = document.documentElement;
-    const mediaDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    function obterTema() {
-      const temaSalvo = localStorage.getItem('tema-ideal');
-      if (temaSalvo === 'dark' || temaSalvo === 'light') return temaSalvo;
-      return mediaDark.matches ? 'dark' : 'light';
-    }
-
-    function atualizarBotao(tema) {
-      btnTema.textContent = tema === 'dark' ? 'Modo claro' : 'Modo escuro';
-    }
-
-    function aplicarTema(tema, salvar = false) {
-      if (salvar) {
-        raizHtml.setAttribute('data-theme', tema);
-        localStorage.setItem('tema-ideal', tema);
-      } else {
-        const temaSalvo = localStorage.getItem('tema-ideal');
-        if (temaSalvo) {
-          raizHtml.setAttribute('data-theme', temaSalvo);
-        } else {
-          raizHtml.removeAttribute('data-theme');
-        }
-      }
-      atualizarBotao(obterTema());
-    }
-
-    const temaInicial = obterTema();
-    const temaSalvo = localStorage.getItem('tema-ideal');
-    if (temaSalvo) {
-      raizHtml.setAttribute('data-theme', temaSalvo);
-    }
-    atualizarBotao(temaInicial);
-
-    btnTema.addEventListener('click', function() {
-      const temaAtual = obterTema();
-      const novoTema = temaAtual === 'dark' ? 'light' : 'dark';
-      aplicarTema(novoTema, true);
-    });
-
-    mediaDark.addEventListener('change', function(e) {
-      if (!localStorage.getItem('tema-ideal')) {
-        atualizarBotao(e.matches ? 'dark' : 'light');
-      }
-    });
-  })();
-</script>
 
 </body>
 </html>
