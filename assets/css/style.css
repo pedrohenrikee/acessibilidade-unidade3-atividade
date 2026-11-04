@@ -408,3 +408,88 @@
   }
   
 }
+/* =====================================================
+   Formulário de contato / cadastro
+   Cole este bloco no FINAL de assets/css/style.css
+   ===================================================== */
+
+/* Marcadores de obrigatório / opcional */
+.req { color: var(--erro-color); font-weight: 700; }
+.opc { color: var(--text-muted); font-weight: 400; font-size: 13px; }
+
+/* Rótulos */
+form label { display: block; font-weight: 600; margin-bottom: 4px; }
+.opcao { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.opcao label { display: inline; font-weight: 400; margin: 0; }
+.opcao input { width: 18px; height: 18px; flex: 0 0 auto; }
+
+/* Texto de ajuda (instruções de formato) */
+.campo-ajuda { font-size: 13px; color: var(--text-muted); margin: -6px 0 12px; }
+.campo-ajuda ul { margin: 4px 0 0; padding-left: 20px; }
+
+/* Mensagem de erro: só aparece quando tem texto */
+.erro:empty { display: none; }
+.erro { font-weight: 600; }
+
+/* Campos inválidos: borda mais grossa (não depende só da cor) */
+input[aria-invalid="true"] {
+  border-color: var(--erro-color);
+  border-width: 2px;
+}
+
+/* Demais tipos de campo no mesmo estilo dos existentes */
+input[type=tel], input[type=date], select {
+  width: 100%;
+  padding: 9px;
+  background: var(--bg-wrap);
+  color: var(--text-main);
+  border: 1px solid var(--border-field);
+  border-radius: 5px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+input[type=tel]:focus, input[type=date]:focus, select:focus {
+  outline: 2px solid var(--text-link);
+  border-color: var(--text-link);
+}
+input[type=checkbox]:focus-visible, input[type=radio]:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+/* Resumo de erros (aparece só quando tem conteúdo) */
+.resumo-erros:empty { display: none; }
+.resumo-erros {
+  border: 2px solid var(--erro-color);
+  background: var(--bg-aviso);
+  color: var(--text-main);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 16px 0;
+}
+.resumo-erros:focus { outline: 3px solid #ffbf47; outline-offset: 2px; }
+.resumo-titulo { margin: 0 0 8px; font-size: 17px; }
+.resumo-erros ul { margin: 0; padding-left: 20px; }
+
+/* Mensagem de sucesso */
+.sucesso { display: none; }
+.sucesso.visivel {
+  display: block;
+  border: 2px solid #2e7d32;
+  background: var(--bg-aviso);
+  color: var(--text-main);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-weight: 600;
+}
+
+/* Honeypot: fora da tela, invisível para pessoas */
+.hp-campo {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
