@@ -1,157 +1,190 @@
-# Atividade — Conserte a página
+<div align="center">
 
-**Unidade 3 · HTML Semântico: a Base da Acessibilidade**
+# 🎸 Harmonia Instrumentos Musicais
 
-Esta é a página da loja fictícia **Harmonia Instrumentos Musicais**. Abra `index.html` no navegador: o layout está alinhado, as cores estão certas, os botões clicam. Nenhum cliente que enxerga reclamou.
+**Loja fictícia de instrumentos musicais, reconstruída com foco em acessibilidade, semântica e responsividade.**
 
-A loja recebeu uma reclamação de um cliente que usa leitor de tela. Ele não consegue encontrar o conteúdo principal, não sabe para onde os links levam e desistiu do formulário de contato.
+![HTML5](https://img.shields.io/badge/HTML5-semântico-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-variáveis%20e%20media%20queries-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-puro-F7DF1E?logo=javascript&logoColor=black)
+![WCAG](https://img.shields.io/badge/WCAG-2.1%20AA-2e7d32)
 
-**A página tem 34 problemas de semântica e acessibilidade. Sua tarefa é consertá-los.**
-
----
-
-## O que você vai entregar
-
-1. Um **fork** deste repositório com o `index.html` corrigido.
-2. Uma **página publicada no GitHub Pages** mostrando sua versão corrigida.
-3. Um **Pull Request** para este repositório, com o link do seu Pages no corpo do PR.
-
-O Pull Request **é** a entrega. O diff dele mostra exatamente o que você mudou  é isso que será avaliado. Ele não será mesclado; será revisado, comentado e fechado.
+</div>
 
 ---
 
-## Passo a passo
+## 📖 Sobre o projeto
 
-### 1. Faça o fork
+Este repositório é a resolução da **Atividade da Unidade 3 — HTML Semântico: a Base da Acessibilidade**.
 
-Clique em **Fork**, no topo desta página. Você vai ficar com uma cópia do repositório na sua conta.
+O ponto de partida era uma página que *parecia* correta para quem enxerga, mas tinha **34 problemas de semântica e acessibilidade** que impediam o uso por leitores de tela e navegação por teclado. A tarefa original era corrigi-los **mantendo o layout**.
 
-### 2. Traga para o seu computador
+Depois da correção, o projeto evoluiu: ganhou tema claro/escuro, carrossel, banner, cartões de produto, formulário de cadastro com validação acessível, respeito às preferências do usuário (`prefers-reduced-motion` e `prefers-color-scheme`) e, por fim, **layout responsivo com menu hambúrguer**.
+
+## ✨ Funcionalidades implementadas
+
+### 1. Correções de semântica e acessibilidade (HTML)
+
+| Área | O que foi feito |
+| --- | --- |
+| **Marcação de ênfase** | `<b>` → `<strong>`, `<i>` → `<em>`, `<u>` → `<strong>` (significado, não só aparência) |
+| **Hierarquia de cabeçalhos** | Estrutura lógica de `h1` → `h2` → `h3`, sem saltos de nível |
+| **Landmarks** | `<div>` trocadas por `<header>`, `<nav>`, `<main>`, `<aside>` e `<footer>` |
+| **Navegação** | Menu com `<nav aria-label="Principal">` + `<ul>`/`<li>`; trilha de navegação (breadcrumb) com `aria-label` próprio |
+| **Idioma** | `lang="pt-BR"` no `<html>` |
+| **Tabelas** | `<caption>` descritivo, `<th scope="col">` e `<th scope="row">` no lugar de `<td>` estilizados |
+| **Links e botões** | Textos de link que fazem sentido isolados, aviso "(abre em nova aba)" e `rel="noopener noreferrer"`; `<div>` clicáveis trocadas por `<button type="button">` |
+| **Listas** | Listas simuladas com `<br>` convertidas em `<ul>`/`<li>` |
+| **Imagens** | Textos alternativos descritivos; imagens decorativas com `alt=""` |
+| **Formulário** | Veja a seção própria abaixo |
+
+### 2. ⏭️ Skip link
+
+Link "Pular para o conteúdo principal" que fica oculto e aparece ao receber foco via teclado (`Tab`), levando direto ao `<main>`.
+
+### 3. 🌗 Tema claro/escuro (`prefers-color-scheme`)
+
+- Todas as cores centralizadas em **variáveis CSS** (`--bg-*`, `--text-*`, `--border-*`).
+- O site **respeita a preferência do sistema operacional** automaticamente.
+- Botão no cabeçalho para **alternar manualmente** entre claro e escuro, com a escolha salva no `localStorage`.
+- O texto do botão muda conforme o tema ativo ("Modo escuro" / "Modo claro").
+
+### 4. 🎞️ Carrossel de destaques
+
+- Três slides (guitarras, baterias e pianos) com troca pelo botão **"Próximo destaque"**.
+- Slides inativos escondidos com `aria-hidden`, para que leitores de tela leiam apenas o slide visível.
+- Animação de entrada suave com `@keyframes`.
+
+### 5. 🎨 Banner e cartões de produto
+
+- Banner "Semana da Música" com gradiente, sombra e animação de entrada.
+- Lista de produtos em **flexbox** com cartões que quebram de linha conforme o espaço, com efeito de *hover*.
+
+### 6. ♿ `prefers-reduced-motion`
+
+Para usuários que pedem menos movimento no sistema, animações e transições são praticamente desativadas (inclusive a animação do carrossel e o *zoom* dos cartões e imagens).
+
+### 7. 📝 Página de contato com formulário acessível (`contato.html`)
+
+- Campos agrupados com `<fieldset>` e `<legend>`.
+- Todos os campos com `<label for>` associado; obrigatoriedade indicada visualmente (`*`) **e** para leitores de tela (texto "obrigatório" com `.sr-only`).
+- `required`, `aria-required`, `autocomplete` apropriados e `inputmode` para teclados móveis.
+- Textos de ajuda ligados aos campos com `aria-describedby`.
+- **Validação em JavaScript** (`contato.js`):
+  - nome completo, e-mail, **CPF com cálculo dos dígitos verificadores**, data de nascimento, telefone, senha (mín. 8 caracteres, letra e número), confirmação de senha e aceite dos termos;
+  - **máscaras** automáticas de CPF e telefone;
+  - mensagens de erro específicas ("Erro: ...") vinculadas ao campo, com `aria-invalid`;
+  - **resumo de erros** no topo (`role="alert"`) com links que levam direto a cada campo com problema;
+  - mensagem de sucesso com `role="status"`;
+  - campo *honeypot* escondido contra envios automatizados.
+
+### 8. 📱 Responsividade e menu hambúrguer
+
+Layout adaptado para tablets e celulares **sem alterar o visual do desktop**:
+
+- **Até 900px:** a barra lateral "Conteúdo relacionado" passa para baixo do conteúdo.
+- **Até 768px:**
+  - menu principal vira **hambúrguer** (botão com ícone animado que se transforma em "X");
+  - cabeçalho reorganizado, títulos e espaçamentos reduzidos;
+  - cartões de produto em coluna, com botões em largura total;
+  - banner, carrossel, tabela e formulário ajustados à largura da tela, **sem rolagem horizontal**.
+- **Até 400px:** ajustes finos de fonte e espaçamento para telas bem pequenas.
+
+**Acessibilidade do menu hambúrguer** (`assets/js/menu.js`):
+
+- `aria-expanded`, `aria-controls` e `aria-label` dinâmico ("Abrir menu" / "Fechar menu");
+- fecha com a tecla **Esc** (devolvendo o foco ao botão), ao clicar em um link ou ao voltar para a tela larga;
+- foco visível com o mesmo contorno amarelo do restante do site;
+- **melhoria progressiva:** sem JavaScript, o menu permanece visível e utilizável.
+
+### 9. 🤖 Verificação automática de acessibilidade (CI)
+
+Workflow do GitHub Actions (`.github/workflows/acessibilidade.yml`) que roda a cada Pull Request:
+
+- validação de HTML com **html-validate**;
+- varredura **WCAG 2.1 AA** com **axe-core** (via Playwright/Chromium);
+- relatório publicado no resumo do job, na aba *Checks*.
+
+## 🗂️ Estrutura do projeto
+
+```text
+.
+├── index.html                 # Página inicial (loja)
+├── contato.html               # Cadastro e contato
+├── assets/
+│   ├── css/
+│   │   └── style.css          # Estilos, temas, animações e responsividade
+│   ├── js/
+│   │   ├── carrossel.js       # Carrossel de destaques
+│   │   ├── tema.js            # Alternância de tema claro/escuro
+│   │   ├── menu.js            # Menu hambúrguer (mobile)
+│   │   └── contato.js         # Validação e máscaras do formulário
+│   └── img/                   # Imagens dos instrumentos
+├── .github/
+│   ├── workflows/acessibilidade.yml
+│   ├── scripts/verificar-acessibilidade.mjs
+│   └── PULL_REQUEST_TEMPLATE.md
+├── .htmlvalidate.json         # Regras do validador de HTML
+├── CHECKLIST.md               # Checklist da atividade
+└── GUIA-GIT-E-PAGES.md        # Guia de Git e GitHub Pages
+```
+
+## 🚀 Como executar
+
+Não há dependências nem etapa de build. Basta clonar e abrir no navegador:
 
 ```bash
-git clone https://github.com/SEU-USUARIO/acessibilidade-unidade3-atividade.git cd acessibilidade-unidade3-atividade
-git checkout -b correcao
+git clone https://github.com/pedrohenrikee/acessibilidade-unidade3-atividade.git
+cd acessibilidade-unidade3-atividade
 ```
 
-> Nunca trabalhe direto na branch `main`. Trabalhe na branch `correcao`.
-
-### 3. Conserte o `index.html`
-
-Use o [`CHECKLIST.md`](CHECKLIST.md) como guia. Ele tem 7 blocos de verificação, na mesma ordem da aula: apresentação vs. semântica, cabeçalhos, landmarks, tabelas, links e botões, listas e formulários.
-
-**Regras da correção:**
-
-- Você pode acrescentar, trocar e remover tags HTML à vontade.
-- Você pode ajustar os seletores do CSS para acompanhar as tags novas.
-- **Mantenha o layout**: mesmas cores, mesmas colunas, mesmos cartões, mesma tabela. Trocar `<div>` por `<main>` ou `<td>` por `<th>` não deve reposicionar nada na tela.
-- Exceção: algumas correções **acrescentam informação visível** de propósito o aviso "(abre em nova aba)", o texto "(obrigatório)", o `<caption>` da tabela, a borda do `<fieldset>`e mensagens de erro específicas. Essas mudanças são esperadas.
-- Não use JavaScript. Não use ARIA onde uma tag HTML nativa já resolve o problema.
-  
-> Se ao final a página ficou visualmente equivalente e estruturalmente diferente, você entendeu a aula.
-
-### 4. Faça commits pequenos
-
-Um commit por bloco do checklist ajuda muito na hora da revisão:
+Abra o `index.html` diretamente no navegador ou, se preferir um servidor local:
 
 ```bash
-git add index.html
-git commit -m "Corrige hierarquia de cabecalhos"
+npx serve .
 ```
 
-Sugestão de mensagens: `Adiciona landmarks`, `Corrige textos de link`, `Transforma tabela de layout em CSS Grid`, `Associa labels aos campos do formulario`.
+Para testar a responsividade, abra as ferramentas de desenvolvedor (`F12`) e ative o **modo dispositivo** (`Ctrl + Shift + M`). O botão do menu hambúrguer aparece em larguras de **768px ou menos**.
 
-### 5. Envie para o seu fork
+## 🧪 Como testar a acessibilidade
 
-```bash
-git push -u origin correcao
-```
+1. **Teclado:** percorra a página só com `Tab`, `Shift + Tab`, `Enter` e `Esc`. Todos os controles devem ser alcançáveis e ter foco visível.
+2. **Leitor de tela:** NVDA (Windows) ou VoiceOver (macOS). Confira a lista de cabeçalhos, links e landmarks.
+3. **Preferências do sistema:** alterne o tema do sistema operacional e a opção de reduzir movimento.
+4. **Validador W3C:** <https://validator.w3.org/nu/>
+5. **Responsividade:** teste em 320px, 375px, 768px e desktop, sem rolagem horizontal.
 
-### 6. Publique no GitHub Pages
+## 🕒 Histórico de evolução
 
-No **seu fork**: `Settings` → `Pages` → em **Source**, escolha `Deploy from a branch` → selecione a branch **`correcao`** e a pasta **`/ (root)`** → `Save`.
+| Data | Etapa |
+| --- | --- |
+| 26/08/2026 | Página original com problemas de acessibilidade (repositório do professor) |
+| 05/09/2026 | Troca de `<b>`, `<i>` e `<u>` por `<strong>` e `<em>` |
+| 07/09/2026 | Hierarquia de cabeçalhos e `<header>` |
+| 09/09/2026 | Landmarks (`nav`, `main`, `aside`, `footer`), `lang`, tabelas, links, botões, listas e formulário |
+| 16/09/2026 | Skip link |
+| 23/09/2026 | Botão de tema dark e `prefers-color-scheme` |
+| 28/10/2026 | CSS separado em `assets/`, carrossel, imagens e `prefers-reduced-motion` |
+| 04/11/2026 | Página de contato com formulário e validação |
+| 25/11/2026 | Responsividade e menu hambúrguer |
 
-Espere de 1 a 2 minutos e recarregue a página de Settings. O endereço vai aparecer no topo, no formato:
+## 🛠️ Tecnologias
 
-```
-https://SEU-USUARIO.github.io/acessibilidade-unidade3-atividade/
-```
+- **HTML5** semântico
+- **CSS3**: variáveis customizadas, Flexbox, media queries, `prefers-color-scheme` e `prefers-reduced-motion`
+- **JavaScript** puro (sem frameworks ou bibliotecas)
+- **GitHub Actions**, **axe-core**, **html-validate** e **Playwright** para verificação automática
 
-**Confira que o link abre a sua versão corrigida** antes de continuar.
+## 👤 Autor
 
-Se você não tem certeza de nenhum destes passos, veja o [`GUIA-GIT-E-PAGES.md`](GUIA-GIT-E-PAGES.md), que tem os comandos comentados e o caminho pelo site do GitHub.
+**Pedro** — [@pedrohenrikee](https://github.com/pedrohenrikee)
 
-### 7. Abra o Pull Request
-
-No seu fork, clique em **Contribute** → **Open pull request**.
-
-- **Base:** `main` deste repositório (o do professor)
-- **Compare:** a sua branch `correcao`
-
-O corpo do PR já vem com um formulário. Preencha, principalmente:
-
-- o **link do seu GitHub Pages**;
-- a lista dos problemas que você corrigiu, agrupados pelos 7 blocos;
-- por que cada troca melhora a experiência de quem usa tecnologia assistiva.
-
-Pronto. A entrega está feita.
+Projeto desenvolvido como atividade acadêmica. Base e enunciado: Prof. Sandro Amâncio de Sá.
 
 ---
 
-## Verificação automática
+<div align="center">
 
-Assim que o PR abrir, um teste automático roda sobre a sua página e publica um relatório. Para ver: aba **Checks** do seu PR → **Acessibilidade** → abra o resumo do job.
+*A loja é fictícia; os dados (CNPJ, preços e páginas de destino) são apenas ilustrativos.*
 
-O relatório traz validação de HTML e uma varredura WCAG 2.1 AA com o axe-core. Use como apoio mas leia com atenção o que vem a seguir.
-
-Na versão original desta página, as duas ferramentas juntas apontam **menos da metade** dos 34 problemas. O axe encontra 6 tipos de problema; o validador de HTML, 15 erros de sintaxe. Nenhum dos dois percebe:
-
-- textos de link sem sentido isolado ("clique aqui", "saiba mais")
-- `<div>` fazendo papel de botão, inalcançável pelo teclado
-- lista simulada com `<br>` em vez de `<ul>`
-- tabela usada para layout
-- `<td>` estilizado no lugar de `<th scope>`
-- `<caption>` ausente
-- grupo de campos sem `<fieldset>`/`<legend>`
-- `<b>`/`<i>`/`<u>` onde cabia `<strong>`/`<em>`/`<ins>`
-- texto alternativo que existe mas não descreve nada útil
-- mensagens de erro genéricas como "Erro."
-
-**Um relatório limpo não significa que a página está correta.** Essa é, aliás, uma das lições mais importantes da unidade: acessibilidade não se resolve rodando uma ferramenta. O checklist continua sendo o guia.
-
----
-
-## Como você será avaliado
-
-| Faixa        | Critério                                                                                            |
-| ------------ | --------------------------------------------------------------------------------------------------- |
-| Insuficiente | Menos de 10 itens corrigidos, ou mudanças apenas no CSS                                             |
-| Suficiente   | Cabeçalhos e landmarks corrigidos (blocos 2 e 3)                                                    |
-| Bom          | Acrescenta links, listas e tabela (blocos 4, 5 e 6)                                                 |
-| Excelente    | Formulário completo com `fieldset`/`legend`, `required` e mensagens de erro programáticas (bloco 7) |
-
-Achar 15 problemas com boa justificativa vale mais do que listar 30 sem explicar nenhum. A
-justificativa entra no corpo do PR.
-
----
-
-## Como testar o que você corrigiu
-
-1. **Só com o teclado.** Percorra a página inteira com Tab.
-   Você alcança e ativa todos os controles?
-   O foco fica visível?
-   Na versão original, os dois botões "Adicionar ao carrinho" são inalcançáveis descobrir por quê já resolve um dos 34 problemas.
-3. **Com leitor de tela.** No NVDA (gratuito, Windows): `H` pula entre cabeçalhos, `Insert + F7` abre a lista de elementos com as abas Links, Cabeçalhos e     Landmarks, `T` pula entre tabelas, `F` entre campos de formulário. Compare a lista de elementos antes e depois da sua correção.
-   No macOS, o VoiceOver (`Cmd + F5`) tem o rotor em `VO + U`.
-4. **Validador do W3C.** <https://validator.w3.org/nu/>
-5. **Comparação visual.** Abra a original e a sua versão em abas lado a lado.
-
----
-
-## Prazo e dúvidas
-
-Prazo: **09/09/2026**.
-
-Dúvidas sobre a atividade: abra uma **issue** neste repositório. Dúvidas sobre Git e GitHub Pages:
-Comece pelo [`GUIA-GIT-E-PAGES.md`](GUIA-GIT-E-PAGES.md).
-
-
+</div>
