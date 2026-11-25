@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 (function() {
   const btn = document.getElementById('btn-menu');
