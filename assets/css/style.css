@@ -408,36 +408,27 @@
   }
   
 }
-/* =====================================================
-   Formulário de contato / cadastro
-   Cole este bloco no FINAL de assets/css/style.css
-   ===================================================== */
 
-/* Marcadores de obrigatório / opcional */
 .req { color: var(--erro-color); font-weight: 700; }
 .opc { color: var(--text-muted); font-weight: 400; font-size: 13px; }
 
-/* Rótulos */
+
 form label { display: block; font-weight: 600; margin-bottom: 4px; }
 .opcao { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .opcao label { display: inline; font-weight: 400; margin: 0; }
 .opcao input { width: 18px; height: 18px; flex: 0 0 auto; }
 
-/* Texto de ajuda (instruções de formato) */
 .campo-ajuda { font-size: 13px; color: var(--text-muted); margin: -6px 0 12px; }
 .campo-ajuda ul { margin: 4px 0 0; padding-left: 20px; }
 
-/* Mensagem de erro: só aparece quando tem texto */
 .erro:empty { display: none; }
 .erro { font-weight: 600; }
 
-/* Campos inválidos: borda mais grossa (não depende só da cor) */
 input[aria-invalid="true"] {
   border-color: var(--erro-color);
   border-width: 2px;
 }
 
-/* Demais tipos de campo no mesmo estilo dos existentes */
 input[type=tel], input[type=date], select {
   width: 100%;
   padding: 9px;
@@ -458,7 +449,6 @@ input[type=checkbox]:focus-visible, input[type=radio]:focus-visible {
   outline-offset: 2px;
 }
 
-/* Resumo de erros (aparece só quando tem conteúdo) */
 .resumo-erros:empty { display: none; }
 .resumo-erros {
   border: 2px solid var(--erro-color);
@@ -472,7 +462,6 @@ input[type=checkbox]:focus-visible, input[type=radio]:focus-visible {
 .resumo-titulo { margin: 0 0 8px; font-size: 17px; }
 .resumo-erros ul { margin: 0; padding-left: 20px; }
 
-/* Mensagem de sucesso */
 .sucesso { display: none; }
 .sucesso.visivel {
   display: block;
@@ -485,11 +474,103 @@ input[type=checkbox]:focus-visible, input[type=radio]:focus-visible {
   font-weight: 600;
 }
 
-/* Honeypot: fora da tela, invisível para pessoas */
 .hp-campo {
   position: absolute;
   left: -9999px;
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.btn-menu { display: none; }
+
+@media (max-width: 900px) {
+  #miolo { flex-direction: column; gap: 20px; }
+  #conteudo { width: 100%; }
+  .lateral { flex: 0 0 auto; width: 100%; }
+}
+
+@media (max-width: 768px) {
+  #topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    padding: 14px 16px;
+  }
+  #topo > div:first-child { flex: 1 1 100%; }
+  .titulo-principal { font-size: 22px; }
+  .subtitulo { font-size: 13px; }
+
+  .btn-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    cursor: pointer;
+    order: 3;
+    margin-left: auto;
+  }
+  .btn-menu[hidden] { display: none; }
+  .btn-menu:hover { border-color: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.08); }
+  .btn-menu:focus-visible { outline: 2px solid #ffbf47; outline-offset: 2px; }
+  .btn-menu-barras,
+  .btn-menu-barras::before,
+  .btn-menu-barras::after {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-inverse);
+    border-radius: 2px;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+  .btn-menu-barras { position: relative; }
+  .btn-menu-barras::before,
+  .btn-menu-barras::after { content: ""; position: absolute; left: 0; }
+  .btn-menu-barras::before { top: -7px; }
+  .btn-menu-barras::after { top: 7px; }
+  .btn-menu.ativo .btn-menu-barras { background: transparent; }
+  .btn-menu.ativo .btn-menu-barras::before { transform: translateY(7px) rotate(45deg); }
+  .btn-menu.ativo .btn-menu-barras::after { transform: translateY(-7px) rotate(-45deg); }
+
+  .js-menu #menu { display: none; padding: 6px 16px; }
+  .js-menu #menu.aberto { display: block; }
+  #menu ul { flex-direction: column; }
+  #menu li { margin-right: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+  #menu li:last-child { border-bottom: none; }
+  #menu a { display: block; padding: 12px 4px; }
+
+  #trilha { padding: 10px 16px; }
+  #miolo { padding: 16px; }
+  .h1-falso { font-size: 24px; }
+  h2, h3 { font-size: 19px; }
+
+  .banner { min-height: 160px; padding: 28px 16px; margin: 20px 0; }
+  .banner h2 { font-size: 1.5rem; }
+  .banner p { font-size: 1rem; }
+
+  .slide img { height: auto; max-height: 300px; aspect-ratio: 4 / 3; }
+
+  .lista-produtos { gap: 14px; }
+  .cartao { flex: 1 1 100%; }
+  .cartao img { max-width: 100%; height: auto; }
+  .cartao .botao { width: 100%; padding: 12px 16px; }
+
+  table { font-size: 13px; }
+  td, th { padding: 7px 6px; }
+
+  fieldset { min-width: 0; padding: 12px; }
+
+  #rodape { padding: 16px; }
+}
+
+@media (max-width: 400px) {
+  .titulo-principal { font-size: 19px; }
+  table { font-size: 12px; }
+  td, th { padding: 6px 4px; }
 }
